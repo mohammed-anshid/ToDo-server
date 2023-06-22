@@ -1,5 +1,5 @@
 import express , { Router } from 'express';
-import { addTasks, addToDosToTask, authentication, editPassword, editProfile, getTasks, handleCheckBoxStatus, userProfile, userSignin, userSignup } from '../controller/userController';
+import { addTasks, addToDosToTask, authentication, editPassword, editProfile, editTask, getTasks, handleCheckBoxStatus, removeTask, removeToDo, userProfile, userSignin, userSignup } from '../controller/userController';
 import { verifyToken } from '../middlewares/verifyToken';
 
 
@@ -12,7 +12,10 @@ router.get('/profile',verifyToken,userProfile)
 router.patch('/profile',verifyToken,editProfile)
 router.patch('/security',verifyToken,editPassword)
 router.get('/tasks',verifyToken,getTasks)
+router.patch('/edit-task',editTask)
+router.patch('/delete-task',verifyToken,removeTask)
 router.post('/todos',verifyToken,addToDosToTask)
+router.patch('/remove-todo',verifyToken,removeToDo)
 router.post('/add',verifyToken,addTasks)
 router.patch('/checkbox',verifyToken,handleCheckBoxStatus)
 

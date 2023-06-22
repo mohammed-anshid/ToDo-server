@@ -194,6 +194,42 @@ export const addTasks = async (req: Request , res:Response) => {
     }
 }
 
+export const editTask = async (req: Request, res: Response) => {
+    try {
+        const taskId = req.query.id;
+        const task = req.query.task
+        if(taskId && task){
+            await toDoModel.findByIdAndUpdate({_id:taskId},{
+                title: task
+            })
+            res.status(200).json({
+                status:true,
+                message: 'updated successfully',
+            })
+        }else{
+            res.json({status:false,message:'Somthing went wrong'})
+        }
+    } catch (error) {
+        res.status(500).json({status:false,message:'internal server error'})
+    }
+}
+ 
+export const removeTask = async (req: Request, res: Response) => {
+    try {
+        const taskId = req.query.id;
+        if(taskId) {
+            await toDoModel.findByIdAndDelete({_id:taskId})
+            res.status(200).json({
+                status:true,
+                message: 'deleted successfully',
+            })
+        }else{
+            res.json({status:false,message:'Somthing went wrong'})
+        }
+    } catch (error) {
+        res.status(500).json({status:false,message:'internal server error'})
+    }
+}
 
 export const addToDosToTask =  async (req: Request, res: Response) => {
     try {
@@ -214,6 +250,29 @@ export const addToDosToTask =  async (req: Request, res: Response) => {
             })
         }else{
             res.json({status:false,message:'Somthing went wrong'})
+        }
+    } catch (error) {
+        res.status(500).json({status:false,message:'internal server error'})
+    }
+}
+
+export const removeToDo = async (req: Request, res: Response) => {
+    try {
+        const { taskId , todoId } = req.body
+        if(taskId && todoId){
+            const task = await toDoModel.findById({_id:taskId})
+            const index = task?.todos.findIndex((element:any)=> element._id.toString() === todoId)
+            if (index === -1) {
+                return res.json({ status: false, message: 'Element not found' });
+            }
+            task?.todos?.splice(index, 1);
+            await task?.save();
+            res.status(200).json({
+                status:true,
+                message: 'Deleted successfully',
+            })
+        }else{
+            res.json({status:false,message:'failed'})
         }
     } catch (error) {
         res.status(500).json({status:false,message:'internal server error'})
