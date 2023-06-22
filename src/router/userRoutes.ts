@@ -1,10 +1,11 @@
 import express , { Router } from 'express';
-import { addTasks, addToDosToTask, editPassword, editProfile, getTasks, handleCheckBoxStatus, userProfile, userSignin, userSignup } from '../controller/userController';
+import { addTasks, addToDosToTask, authentication, editPassword, editProfile, getTasks, handleCheckBoxStatus, userProfile, userSignin, userSignup } from '../controller/userController';
 import { verifyToken } from '../middlewares/verifyToken';
 
 
 const router :Router = express.Router();
 
+router.post('/auth',verifyToken,authentication)
 router.post('/signup',userSignup)
 router.post('/signin',userSignin)
 router.get('/profile',verifyToken,userProfile)

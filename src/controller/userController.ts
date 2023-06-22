@@ -242,3 +242,10 @@ export const handleCheckBoxStatus = async (req: Request, res: Response) => {
         res.status(500).json({status:false,message:'internal server error'})
     }
 }
+
+export const authentication = (req: Request, res:Response) => {
+    res.status(200).json({
+        status:true,
+        message: 'Task added successfully',
+    })
+}
