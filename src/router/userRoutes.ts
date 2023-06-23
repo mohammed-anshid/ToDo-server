@@ -4,19 +4,25 @@ import { verifyToken } from '../middlewares/verifyToken';
 
 
 const router :Router = express.Router();
+// authentication routes //
+router.post('/auth',verifyToken,authentication)    
 
-router.post('/auth',verifyToken,authentication)
-router.post('/signup',userSignup)
-router.post('/signin',userSignin)
-router.get('/profile',verifyToken,userProfile)
-router.patch('/profile',verifyToken,editProfile)
-router.patch('/security',verifyToken,editPassword)
-router.get('/tasks',verifyToken,getTasks)
-router.patch('/edit-task',editTask)
-router.patch('/delete-task',verifyToken,removeTask)
-router.post('/todos',verifyToken,addToDosToTask)
-router.patch('/remove-todo',verifyToken,removeToDo)
-router.post('/add',verifyToken,addTasks)
-router.patch('/checkbox',verifyToken,handleCheckBoxStatus)
+// User signup & signin Management routes //
+router.post('/signup',userSignup)                   // user signup
+router.post('/signin',userSignin)                   // user signin
+
+// User Profile Management routes //
+router.get('/profile',verifyToken,userProfile)      // Get Profiole
+router.patch('/profile',verifyToken,editProfile)    // Edit Profile
+router.patch('/security',verifyToken,editPassword)  // Edit Password
+
+// User Task and Todo list Management routes //
+router.get('/tasks',verifyToken,getTasks)           // Get All Tasks
+router.patch('/edit-task',editTask)                 // Edit Task
+router.patch('/delete-task',verifyToken,removeTask) // Delete Task
+router.post('/todos',verifyToken,addToDosToTask)    // Add Todo to Task List
+router.patch('/remove-todo',verifyToken,removeToDo) // Remove Todo from Task
+router.post('/add',verifyToken,addTasks)            // Add Task
+router.patch('/checkbox',verifyToken,handleCheckBoxStatus)  // Todo Checkbox Status
 
 export default router ;

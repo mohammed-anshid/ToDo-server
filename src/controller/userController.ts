@@ -5,7 +5,8 @@ import userModel from '../model/userSchema';
 import toDoModel from '../model/toDoSchema';
 
 
-//---> User-Signup <---//
+//-------------------------> User-Signup <-----------------------------//
+
 export const userSignup = async (req: Request, res: Response) => {
     try {
         const { name, email, password } = req.body
@@ -41,8 +42,7 @@ export const userSignup = async (req: Request, res: Response) => {
     }
 }
 
-
-//---> User-Signin <---//
+//-------------------------> User-Signin <-----------------------------//
 
 export const userSignin = async (req: Request, res: Response) => {
     try {
@@ -79,6 +79,7 @@ export const userSignin = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> User-Profile <-----------------------------//
 
 export const userProfile = async (req: Request, res: Response) => {
     try {
@@ -102,6 +103,8 @@ export const userProfile = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> Edit-Profile <-----------------------------//
+
 export const editProfile = async (req: Request, res: Response) => {
     try {
         const userData = req.body
@@ -123,6 +126,7 @@ export const editProfile = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> Edit-Password of User <-----------------------------//
 
 export const editPassword = async (req: Request, res: Response) => {
     try {
@@ -156,6 +160,7 @@ export const editPassword = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> Get All Task of specific user <-----------------------------//
 
 export const getTasks = async (req: Request, res: Response) => {
     try {
@@ -170,6 +175,8 @@ export const getTasks = async (req: Request, res: Response) => {
         res.status(500).json({status:false,message:'internal server error'})
     }
 }
+
+//-------------------------> Add Task <-----------------------------//
 
 export const addTasks = async (req: Request , res:Response) => {
     try {
@@ -194,6 +201,8 @@ export const addTasks = async (req: Request , res:Response) => {
     }
 }
 
+//-------------------------> Edit Task <-----------------------------//
+
 export const editTask = async (req: Request, res: Response) => {
     try {
         const taskId = req.query.id;
@@ -214,6 +223,8 @@ export const editTask = async (req: Request, res: Response) => {
     }
 }
  
+//-------------------------> Remove Task <-----------------------------//
+
 export const removeTask = async (req: Request, res: Response) => {
     try {
         const taskId = req.query.id;
@@ -230,6 +241,8 @@ export const removeTask = async (req: Request, res: Response) => {
         res.status(500).json({status:false,message:'internal server error'})
     }
 }
+
+//-------------------------> Add todo to Task <-----------------------------//
 
 export const addToDosToTask =  async (req: Request, res: Response) => {
     try {
@@ -256,6 +269,8 @@ export const addToDosToTask =  async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> Remove todo From Task <-----------------------------//
+
 export const removeToDo = async (req: Request, res: Response) => {
     try {
         const { taskId , todoId } = req.body
@@ -279,6 +294,7 @@ export const removeToDo = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> CheckBox Management <-----------------------------//
 
 export const handleCheckBoxStatus = async (req: Request, res: Response) => {
     try {
@@ -302,6 +318,7 @@ export const handleCheckBoxStatus = async (req: Request, res: Response) => {
     }
 }
 
+//-------------------------> Authentication <-----------------------------//
 export const authentication = (req: Request, res:Response) => {
     res.status(200).json({
         status:true,
